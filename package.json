@@ -1,0 +1,9 @@
+{
+  "name": "expense-bot",
+  "version": "0.0.0",
+  "description": "ExpenseBot",
+  "main": "server.js",
+  "author": {
+    "name": "Austin"
+  }
+}
