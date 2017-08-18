@@ -1,7 +1,7 @@
 ﻿var http = require('http');
 var director = require('director');
 var bot = require('./bot.js');
-var port = process.env.port || 1337;
+var port = process.env.PORT || 1337;
 
 var router = new director.http.Router({
     '/': {
