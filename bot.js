@@ -6,7 +6,7 @@ function respond()
 {
     var request = JSON.parse(this.req.chunks[0]);
 
-    if (request.text) {
+    if (request.text && request.text != "This is a message!") {
         this.res.writeHead(200);
         postMessage();
         this.res.end();
