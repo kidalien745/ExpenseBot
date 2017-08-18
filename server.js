@@ -1,6 +1,33 @@
 ﻿var http = require('http');
+var director = require('director');
+var bot = require('./bot.js');
 var port = process.env.port || 1337;
-http.createServer(function (req, res) {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello World\n');
-}).listen(port);
+
+var router = new director.http.Router({
+    '/': {
+        get: ping,
+        post: bot.respond
+    }
+});
+
+server = http.createServer(function (req, res) {
+
+    req.chunks = [];
+    req.on('data', function (chunk) {
+        req.chunks.push(chunk.toString());
+    });
+
+    router.dispatch(req, res, function (err) {
+        res.writeHead(err.status, { 'Content-Type': 'text/plain' });
+        res.end(err.message);
+    });
+
+
+});
+
+server.listen(port);
+
+function ping() {
+    this.res.writeHead(200);
+    this.res.end("This is a success!");
+}
