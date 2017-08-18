@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "ExpenseBot", "ExpenseBot\ExpenseBot.njsproj", "{DB59442C-F711-465F-AECD-F696FE7AF60F}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "ExpenseBot", "ExpenseBot.njsproj", "{DB59442C-F711-465F-AECD-F696FE7AF60F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
