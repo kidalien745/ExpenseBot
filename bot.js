@@ -1,6 +1,6 @@
 ﻿var https = require('https');
 
-var botID = null;
+var botID = process.env.BOT_ID;
 
 function respond()
 {
