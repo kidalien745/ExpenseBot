@@ -1,12 +1,16 @@
 ﻿var http = require('http');
 var director = require('director');
 var bot = require('./bot.js');
+var sheet = require('./sheets.js');
 var port = process.env.PORT || 1337;
 
 var router = new director.http.Router({
     '/': {
         get: ping,
         post: bot.respond
+    },
+    '/sheet': {
+        get: sheet.updateSheet
     }
 });
 
@@ -29,5 +33,5 @@ server.listen(port);
 
 function ping() {
     this.res.writeHead(200);
-    this.res.end("This is a success!");
+    this.res.end("This is a success!\n");
 }
