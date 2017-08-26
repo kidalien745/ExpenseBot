@@ -7,10 +7,7 @@ var port = process.env.PORT || 1337;
 var router = new director.http.Router({
     '/': {
         get: ping,
-        post: bot.respond
-    },
-    '/sheet': {
-        get: sheet.updateSheet
+        post: sheet.updateSheet // bot.respond
     }
 });
 
