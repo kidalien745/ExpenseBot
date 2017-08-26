@@ -36,13 +36,15 @@ function updateSheet() {
             // Ex - @ExpenseBot $10.99 Giant Swan @Austin Lien @Martha Lien @Lien Photos
             // TODO - Add anybody who likes the message
             var arr = request.text.split(/[@\$]/);
-            sender = arr[0];
-            amount = arr[1].substr(0, arr[1].indexOf(' '));
-            description = arr[1].substr(arr[1].indexOf(' ')+1);
-            tagged = arr.slice(2);
+            sender = request.name;
+            amount = arr[2].substr(0, arr[2].indexOf(' '));
+            description = arr[2].substr(arr[2].indexOf(' ')+1).trim();
+            tagged = arr.slice(3);
             step();
         },
-        doc.useServiceAccountAuth(creds_json, step), // Set auth info
+        function setupAuth(step) {
+            doc.useServiceAccountAuth(creds_json, step); // Set auth info
+        },
         function getInfoAndSheet(step) {
             doc.getInfo(function (err, info) {
                 console.log('Loaded doc: '+info.title+' by '+info.author.email);
@@ -52,10 +54,10 @@ function updateSheet() {
             });
         },
         function createRowObj(step) {
-            var row = { 'reportedby' : sender, 'total' : Number(amount) };
+            var row = { 'reportedby' : sender, 'description' : description, 'total' : Number(amount) };
             for (var i = 0; i < tagged.length; i++)
             {
-                row['p'+i.toString()] = tagged[i];
+                row['p'+i.toString()] = tagged[i].trim();
             }
             sheet.addRow(row, step);
         },
