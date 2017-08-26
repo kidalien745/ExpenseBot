@@ -35,7 +35,12 @@ function updateSheet() {
         function parseRequest(step) {
             // Ex - @ExpenseBot $10.99 Giant Swan @Austin Lien @Martha Lien @Lien Photos
             // TODO - Add anybody who likes the message
-            
+            var arr = request.text.split(/[@\$]/);
+            sender = arr[0];
+            amount = arr[1].substr(0, arr[1].indexOf(' '));
+            description = arr[1].substr(arr[1].indexOf(' ')+1);
+            tagged = arr.slice(2);
+            step();
         },
         doc.useServiceAccountAuth(creds_json, step), // Set auth info
         function getInfoAndSheet(step) {
@@ -46,7 +51,14 @@ function updateSheet() {
                 step(err);
             });
         },
-        sheet.addRow({ 'reportedby' : 'Jacob', 'total' : 150, 'p1' : 'Martha', 'p2' : 'Austin'}, step),
+        function createRowObj(step) {
+            var row = { 'reportedby' : sender, 'total' : Number(amount) };
+            for (var i = 0; i < tagged.length; i++)
+            {
+                row['p'+i.toString()] = tagged[i];
+            }
+            sheet.addRow(row, step);
+        },
         function respond(step) {
             console.log("Updated sheet");
             response.end();
