@@ -52,7 +52,7 @@ function updateSheet() {
             var row = { 'reportedby' : sender, 'description' : description, 'total' : Number(amount) };
             for (var i = 0; i < tagged.length; i++)
             {
-                row['p'+i.toString()] = tagged[i].trim();
+                row['p'+(i+1).toString()] = tagged[i].trim();
             }
             sheet.addRow(row, step);
         },
